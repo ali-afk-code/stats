@@ -40,3 +40,14 @@ func CategoriesAvg(payments []types.Payment) map[types.Category]types.Money {
 	}
 	return res
 }
+
+func PeriodsDynamic(first map[types.Category]types.Money, second map[types.Category]types.Money) map[types.Category]types.Money {
+	for category, amount := range first {
+		if _, ok := second[category]; ok {
+			second[category] -= amount
+		} else {
+			second[category] = 0 - amount
+		}
+	}
+	return second
+}
